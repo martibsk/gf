@@ -27,6 +27,19 @@ def playSnake(
     bonus_vis = False
     bonus_score = 0
 
+    # Generate the valuable keys
+    valuable_keys = list()
+    valuable_keys.append(ord('w'))
+    valuable_keys.append(ord('a'))
+    valuable_keys.append(ord('s'))
+    valuable_keys.append(ord('d'))
+    valuable_keys.append(ord('q'))
+    valuable_keys.append(81)
+    valuable_keys.append(82)
+    valuable_keys.append(83)
+    valuable_keys.append(84)
+    valuable_keys.append(ord('p'))
+
     # Retrieve the current highscore
     if solid_wall:
         try:
@@ -108,6 +121,13 @@ def playSnake(
         cv2.putText(new_board, text_score2, (board_w + 35, 175), cv2.FONT_HERSHEY_SIMPLEX, 0.5, [0,0,0], 1)
         cv2.imshow('snake', new_board)
         key = cv2.waitKey(1000/speed) & 0xFF
+
+        if key == ord('p'):
+            key = ord('o')
+            while key not in valuable_keys:
+                cv2.putText(new_board, '(p)', (int(board_w/2-30), int(board_h/2)), cv2.FONT_HERSHEY_SIMPLEX, 1.5, [0,0,0], 3)
+                cv2.imshow('snake', new_board)
+                key = cv2.waitKey() & 0xFF
         if key == ord('q'):
             break
         elif (key == ord('w') or key == 82) and k != 2:
